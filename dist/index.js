@@ -6218,7 +6218,7 @@ try {
   const comment = payload.comment ? payload.comment.body : payload.issue.body;
   console.log(`comment: ${comment}`)
   const exemptDomainsInput = core.getInput('exemptions')
-  const exemptDomains = exemptDomainsInput.split(',').map(d => d.toLowerCase()).map(d => '@' + d);
+  const exemptDomains = exemptDomainsInput.split(',').map(d => d.toLowerCase()).map(d => d);
   const ignoredEmailsInput = core.getInput('ignoredEmails');
   const ignoredEmails = ignoredEmailsInput.split(',').map(e => e.toLowerCase());
   console.log(`Exempt domains: ${exemptDomains}`);
@@ -6231,7 +6231,7 @@ try {
   emails = emails.map(e => e.toLowerCase());
 
   if (exemptDomains && exemptDomains.length && emails.length) {
-      emails = emails.filter(addr => !exemptDomains.some(d => addr.endsWith(d)));
+      emails = emails.filter(addr => !exemptDomains.some(d => addr.endsWith('@' + d) || addr.endsWith('.' + d)));
   }
 
   if (ignoredEmails && ignoredEmails.length && emails.length) {
