@@ -6218,7 +6218,7 @@ try {
   const comment = payload.comment ? payload.comment.body : payload.issue.body;
   console.log(`comment: ${comment}`)
   const exemptDomainsInput = core.getInput('exemptions')
-  const exemptDomains = exemptDomainsInput.split(',').map(d => d.toLowerCase()).map(d => d);
+  const exemptDomains = exemptDomainsInput.split(',').map(d => d.toLowerCase());
   const ignoredEmailsInput = core.getInput('ignoredEmails');
   const ignoredEmails = ignoredEmailsInput.split(',').map(e => e.toLowerCase());
   console.log(`Exempt domains: ${exemptDomains}`);
